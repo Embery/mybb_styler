@@ -1,0 +1,16 @@
+{
+  "name": "for_mybb_and_co",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./puppet.js"
+  },
+  "author": "Emerael",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "puppeteer": "^16.1.0"
+  }
+}
