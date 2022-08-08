@@ -77,7 +77,7 @@ import replyContent from './src/reply.js';
 
             const html = await tmpPage.evaluate(() => document.documentElement.outerHTML);
             await tmpPage.close();
-            
+
             interceptedRequest.respond({body: html, contentType: 'text/html; charset=utf-8'});
         } else interceptedRequest.continue();;
     });
