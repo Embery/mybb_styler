@@ -1,0 +1,1284 @@
+/*************************************************************
+A - SETUP
+**************************************************************/
+
+/* A1 Import the colour scheme
+-------------------------------------------------------------*/
+
+/* A1.1 */
+@import url(style_cs.1659955720.css);
+
+/* A2 Deal with browser defaults and wonkiness
+-------------------------------------------------------------*/
+
+/* A2.1 */
+html, body {margin: 0; padding: 0}
+
+/* A2.2 */
+.punbb * {
+  margin: 0
+  }
+
+/* A2.3 */
+.punbb ul, .punbb dl, .punbb li, .punbb dd, .punbb dt {
+  padding: 0;
+  list-style: none;
+  }
+
+/* A2.4 */
+.punbb img {
+  border:none
+  }
+
+/* A2.5 */
+.punbb .main table {
+  table-layout: fixed;
+  width: 100%;
+  }
+
+/* A2.6 */
+.checkfield input[type="checkbox"], .radiofield input[type="radio"] {margin: 0 0.3em;}
+
+/* A2.7 */
+p[class="checkfield"] *,
+div[class="checkfield"] *,
+fieldset[class="radiofield"] * {
+  height: 1.8em;
+  vertical-align: middle
+  }
+
+
+ /* A3 Text setup
+-------------------------------------------------------------*/
+
+/* A3.1 */
+body {
+  font-size: 100.01%;
+  }
+
+/* A3.2 */
+.punbb {
+  font: normal 68.75% verdana, arial, helvetica, sans-serif;
+  }
+
+/* 3.3 */
+.punbb textarea, .punbb input, .punbb select, .punbb optgroup {
+  font: 1em verdana, arial, helvetica, sans-serif
+  }
+
+/* A3.4 */
+.punbb h1, .punbb h2, .punbb h3, .punbb h4, .punbb table, .punbb th {
+  font-size: 1em;
+  font-weight: normal;
+  }
+
+/* A3.5 */
+.punbb h1 span, .punbb h2 span, .punbb legend span {
+  font-size: 1.1em;
+  }
+
+/* A3.6 */
+.punbb pre {
+  font: 1.1em/140% monaco, "bitstream vera sans mono", "courier new", courier, monospace
+  }
+
+/* A3.7 */
+.punbb address, .punbb em {
+  font-style: normal
+  }
+
+/* A3.8 */
+.punbb .post-content em {
+  font-style: italic
+  }
+
+/* A3.9 */
+.punbb .post-content em.bbuline {
+  font-style: normal;
+  text-decoration: underline;
+  }
+
+/* A3.10 */
+.punbb a {
+  text-decoration: underline
+  }
+
+/* A3.11 */
+.punbb optgroup {
+  font-weight: bold;
+  }
+
+
+/* A4 Float clearing and hidden items
+-------------------------------------------------------------*/
+
+/* A4.1 */
+#pun:after,
+.punbb .container:after,
+.punbb .post-links ul:after,
+.punbb .main div.inline:after,
+.punbb .post-box:after,
+.punbb .linksb:after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+  overflow:hidden;
+  line-height: 0.0;
+  font-size: 0;
+  }
+
+/* A4.2 */
+.acchide,
+#pun-index #pun-main h1,
+#pun-navlinks h2,
+#pun-pagelinks h2,
+#pun-status h2,
+#pun-ulinks h2,
+.punbb .forum h2,
+.punbb .multipage .topic h2,
+.punbb dl.post-sig dt span,
+.punbb p.crumbs strong,
+.punbb .divider hr,
+.punbb .required label em,
+.punbb .formsubmit label,
+.punbb .submitfield label,
+.punbb .modmenu label,
+#pun-userlist .main h2 {
+  font-size: 0;
+  height: 0;
+  width: 0;
+  line-height: 0.0;
+  position:absolute;
+  left: -9999px;
+  overflow: hidden
+  }
+
+
+/* A5 Basic page layout and borders
+-------------------------------------------------------------*/
+
+/* A5.1 */
+#pun {
+  margin: 30px;
+  position: relative;
+  }
+
+/* A5.2 */
+.punbb {
+  float: left;
+  width: 100%;
+  height: auto;
+  }
+
+/* A5.3 */
+#pun-redirect, #pun-maint {
+  margin: 50px 20% 12px 20%;
+  width: auto;
+  float: none;
+  }
+
+/* A5.4 */
+.punbb .section, .punbb .main {
+  margin-bottom: 1em;
+  }
+
+/* A5.5 */
+.punbb .category, .punbb .post {
+  margin-top: 0.4em;
+  }
+
+/* A5.6 */
+.punbb #pun-category1, .punbb .toppost, .punbb .topicpost {
+  margin-top: 0;
+  }
+
+/* 5.7 */
+#pun-post .topic {
+  margin-top: 1em;
+  }
+
+/* A5.8 */
+.punbb .section, .punbb .forum, .punbb .formal, .punbb .modmenu, .punbb .info,
+.punbb .category, .punbb .post {
+  border-style: none none solid none;
+  border-width: 0px 0px 2px 0px
+  }
+
+/* A5.9 */
+.punbb .container {
+  border-style: solid;
+  border-width: 1px;
+  }
+
+/* A5.10 */
+.punbb .section h2, #pun-main h1, #pun-main h2, #pun-stats h2, #pun-debug h2 {
+  padding: 0.5em 1em;
+  border-style: none solid solid none;
+  border-width: 0 1px 1px 0;
+  }
+
+
+/*************************************************************
+B - MAIN CONTENT - GENERAL
+**************************************************************/
+
+/* B1 Parsed Content, Signatures and Scroll Boxes
+-------------------------------------------------------------*/
+
+/* B1.1 */
+.punbb .post-content {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  }
+
+/* B1.2 */
+.punbb .post-sig dt {
+  display: block;
+  border-top: 1px solid #888;
+  width: 250px;
+  margin: 5px 0;
+  }
+
+/* B1.3 */
+.punbb .post-content p {
+  margin: 0;
+  padding: 0 0 1em 0;
+  line-height: 150%;
+  }
+
+/* B1.4 */
+.punbb .post-content img {
+  vertical-align: text-bottom
+  }
+
+/* B1.5 */
+.punbb .post-content img.postimg {
+  vertical-align: middle;
+  }
+
+/* B1.6 */
+.punbb .post-content .blockcode, .punbb .post-content blockquote {
+  width: 100%;
+  overflow: hidden;
+  }
+
+/* B1.7 */
+.punbb .post-content .scrollbox {
+  width: 100%;
+  overflow: auto;
+  }
+
+/* B1.8 */
+.punbb .post-content .quote-box, .punbb .post-content .code-box {
+  margin: 0.4em 1.8em 1.4em 1.8em;
+  padding: 1em;
+  border-style: solid;
+  border-width: 1px;
+  }
+
+/* B1.9 */
+.punbb .quote-box cite, .punbb .code-box strong.legend {
+  display: block;
+  padding-bottom: 0.7em;
+  font-size: 1.1em;
+  font-weight: bold;
+  font-style: normal;
+  margin: 0;
+  }
+
+/* B2 Information boxes
+-------------------------------------------------------------*/
+
+/* B2.1 */
+.punbb .info-box {
+  padding: 1.1em 1.7em 1em 1.7em;
+  border-style: solid;
+  border-width: 1px;
+  margin: 0 0 1.1em 0;
+  }
+
+/* B2.2 */
+.punbb .info-box * {
+  padding: 0 0 0.7em 0;
+  }
+
+/* B2.3 */
+.punbb #pun-main .info-box .legend {
+  font-size: 1.1em;
+  font-weight: bold;
+  }
+
+
+/* B3 Pagination and posting links
+-------------------------------------------------------------*/
+
+/* B3.1 */
+.punbb .linkst {
+  float: left;
+  position: relative;
+  width: 100%;
+  font-size: 1.1em;
+  height: 0;
+  }
+
+/* B3.2 */
+.multipage {
+  margin-top: 3em;
+  }
+
+/* B3.3 */
+.linkst .pagelink {
+  position: absolute;
+  top: -4em;
+  left: 1em;
+  width: 24em;
+  }
+
+/* B3.4 */
+.linkst .postlink {
+  position: absolute;
+  top: -4em;
+  right: 1em;
+  width: 16em;
+  text-align: right;
+  font-weight: bold;
+  }
+
+/* B3.5 */
+.punbb .linksb {
+  text-align: right;
+  padding: 0.4em 1em 0.5em 1em;
+  font-size: 1.1em;
+  }
+
+/* B3.6 */
+.linksb .pagelink {
+  float: left;
+  width: 24em;
+  text-align: left;
+  }
+
+/* B3.7 */
+.linksb .postlink {
+  float: right;
+  width: 16em;
+  font-weight: bold
+  }
+
+/* B3.8 */
+.subscribelink {
+  clear:both;
+  padding-top: 0.3em;
+  padding-bottom: 0.5em;
+  }
+
+
+/*************************************************************
+C - MAIN CONTENT - SPECIFIC
+**************************************************************/
+
+/* C1 Form layout
+-------------------------------------------------------------*/
+
+/* C1.1 */
+.punbb .formal .container {
+  padding: 1.7em 2.3em 1.1em 2.3em;
+  }
+
+/* C1.2 */
+.punbb .formsubmit {
+  padding: 0 0 0 1.7em;
+  margin: 1em 0 0 0;
+  }
+
+/* C1.3 */
+.punbb .formsubmit input, .punbb .formsubmit a, .punbb .formsubmit span {
+  margin: 0 0.6em 0 0
+  }
+
+/* C1.4 */
+.punbb fieldset {
+  border-style: solid;
+  border-width: 1px;
+  padding: 0 18px 0 18px;
+  margin: 0 0 1em 0
+  }
+
+/* C1.5 */
+.punbb fieldset legend {
+  padding: 0;
+  margin: 0 0 0 11px;
+  font-size: 1.1em
+  }
+
+/* C1.6 */
+.punbb fieldset legend span {
+  padding: 0 5px;
+  margin: 0 0 0 -15px;
+  }
+
+/* C1.7 */
+.punbb fieldset fieldset {
+  border-style: none;
+  margin: 0;
+  padding: 0 0 8px 0
+  }
+
+/* C1.8 */
+.punbb .fs-box {
+  padding: 1em 0 0.8em 0;
+  }
+
+/* C1.9 */
+.punbb .fs-box p, .punbb .fs-box fieldset {
+  padding: 0 0 0.8em 0
+  }
+
+/* C1.10 */
+.punbb .inline .inputfield, .punbb .inline .selectfield, .punbb .inline .passfield {
+  float: left;
+  margin-right: 1em;
+  }
+
+/* C1.11 */
+.punbb .inline .infofield {
+  clear:both
+  }
+
+/* C1.12 */
+.punbb .datafield br {
+  display: none
+  }
+
+/* C1.13 */
+.punbb .required label, .punbb .datafield span.input {
+  font-weight: bold
+  }
+
+/* C1.14 */
+.punbb .datafield span.input a {
+  font-weight: normal;
+  }
+
+/* C1.15 */
+.punbb .areafield span.input, .punbb p.longinput span.input {
+  display: block;
+  padding: 0 12em 0 0;
+  height: 100%; /* For IE */
+  }
+
+/* C1.16 */
+.punbb textarea, .punbb .longinput input {
+  width: 64%;
+  margin: 0;
+  }
+
+/* C1.17 */
+.punbb .hashelp {
+  position: relative;
+  }
+
+/* C1.18 */
+.punbb .helplinks {
+  display: block;
+  position: absolute;
+  top: 1em;
+  right: 0;
+  font-weight: normal;
+  width: 36%;
+  }
+
+/* c1.19 */
+.punbb #profile .helplinks {
+  top: 1.5em;
+  }
+
+/* C1.20 */
+.punbb .helplinks span {
+  display: block;
+  padding-bottom: 0.2em;
+  }
+
+/* C1.21 */
+#pun-post .formal .info-box li {
+  padding-left: 4px;
+  list-style-type: square;
+  list-style-position: inside;
+  line-height: 1.5;
+  margin: 0;
+  }
+
+
+/* C2 Table layout
+-------------------------------------------------------------*/
+
+/* C2.1 */
+.punbb .main .tcl {
+  overflow: hidden;
+  text-align: left;
+  width: 50%;
+  }
+
+/* C2.2 */
+.punbb .main .tc2, .punbb .main .tc3, .punbb .main .tcmod {
+  text-align: center;
+  width: 10%;
+  }
+
+/* C2.3 */
+.punbb .main .tcr {
+  overflow: hidden;
+  text-align: left;
+  width: 30%;
+  }
+
+/* C2.4 */
+#pun-userlist .main .tcl,
+#pun-searchtopics .main .tcl,
+#pun-modviewforum .main .tcl {
+  width: 40%
+  }
+
+/* C2.5 */
+#pun-userlist .main .tc2,
+#pun-searchtopics .main .tc2 {
+  text-align: left;
+  width: 20%;
+  }
+
+/* C2.6 */
+#pun-debug table .tcl {
+  width: 15%;
+  white-space:normal;
+  }
+
+/* C2.7 */
+#pun-debug .tcr {
+  width: 90%;
+  white-space: normal;
+  }
+
+/* C2.8 */
+#pun-index .tcl h3 {
+  font-size: 1.2em;
+  font-weight: bold;
+  }
+
+/* C2.9 */
+.punbb td span.youposted {
+  font-weight: bold;
+  margin-left: -1em;
+  position: absolute;
+  }
+
+/* C2.10 */
+.punbb td .modlist {
+  display: block;
+  padding-top: 0.3em
+  }
+
+/* C2.11 */
+.punbb .main td {
+  border-style: solid none none solid;
+  border-width: 1px 0 0 1px;
+  padding: 0.8em 1em;
+  }
+
+/* C2.12 */
+.punbb .main th {
+  border-style: none none none solid;
+  border-width: 0 0 0 1px;
+  padding: 0.4em 1em 0.4em 1em;
+  }
+
+/* C2.13 */
+.punbb .main .tcl {
+  border-left-style: none;
+  border-left-width: 0
+  }
+
+/* C2.14 */
+.punbb tbody.hasicon td.tcl {
+  padding-left: 3.2em
+  }
+
+/* C2.15 */
+.punbb div.icon {
+  border-style: solid;
+  border-width: 0.6em 0.6em 0.6em 0.6em;
+  height: 0;
+  line-height: 0.0;
+  margin-top: 0.1em;
+  width: 0;
+  }
+
+/* C2.16 */
+.punbb  table div.icon {
+  font-size: 1.05em;
+  position: absolute;
+  margin-left: -2.2em;
+  }
+
+ /* C3 Topics
+-------------------------------------------------------------*/
+
+/* C3.1 */
+.punbb .post .container {
+  border-style: none solid solid solid;
+  border-width: 1px;
+  margin-top: -1px;
+  padding-bottom: 1px;
+  }
+
+/* C3.2 */
+.punbb .post h3 {
+  border-style: solid solid none solid;
+  border-width: 1px;
+  }
+
+/* C3.3 */
+.punbb .post h3 span {
+  padding: 0.5em 1em;
+  display: block;
+  margin-left: 19em;
+  border-left-style: solid;
+  border-left-width: 1px
+  }
+
+/* C3.4 */
+.punbb .post h3 strong {
+  float: right;
+  width: 5em;
+  text-align: right;
+  font-weight: normal;
+  }
+
+/* C3.5 */
+.punbb .post .post-author {
+  float: left;
+  width: 19em;
+  margin-top: -1.5em;
+  overflow: hidden;
+  }
+
+/* C3.6 */
+.punbb .post .post-author ul, .punbb .post .post-author p {
+  padding: 0 1em 1em 1em;
+  line-height: 140%;
+  }
+
+/* C3.7 */
+.pa-author {
+  font-size: 1.1em;
+  font-weight: bold;
+  }
+
+/* C3.8 */
+.pa-author a {
+  text-decoration: none
+  }
+
+/* C3.9 */
+li.pa-title {
+  padding-bottom: 0.4em;
+  font-weight: bold;
+  }
+
+
+li.pa-online {
+  line-height: 0.8em;
+  border-left-style: solid;
+  border-left-width: 0.7em;
+  padding-left: 0.4em;
+  margin-top: 0.7em;
+  }
+
+/* C3.11 */
+.punbb .post-body {
+  margin-left: 19em;
+  border-left-style: solid;
+  border-left-width: 1px;
+  padding: 0 0 1px 0;
+  }
+
+/* C3.12 */
+.punbb .post-box {
+  padding: 1em;
+  }
+
+/*C3.13 */
+.punbb fieldset .post-box {
+  margin-bottom: 0.8em
+  }
+
+/* C3.14 */
+.punbb .post-links {
+  margin-left: 19em;
+  border-left-style: solid;
+  border-left-width: 1px;
+  }
+
+/* C3.15 */
+.punbb .post-links ul {
+  padding: 0 1em 0 0;
+  height: 2em;
+  line-height: 2em;
+  margin-left: -19em;
+  border-top-style: dashed;
+  border-top-width: 1px;
+  background: transparent;
+  text-align: right;
+  }
+
+/* C3.16 */
+.punbb .post-links li {
+  display: inline;
+  padding-left: 1em;
+  }
+
+/* C3.17 */
+.pl-email, .pl-website {
+  float: left;
+  }
+
+/* C3.18 */
+.punbb .clearer {
+  clear: both;
+  height: 0;
+  font-size: 0;
+  }
+
+
+/* C4 Moderator menu
+-------------------------------------------------------------*/
+
+/* C4.1 */
+.punbb .modmenu .container {
+  padding: 0.5em 1em;
+  text-align: right;
+  }
+
+/* C4.2 */
+.punbb .modmenu strong, .punbb .modmenu a {
+  height: 1.8em;
+  line-height: 1.8em;
+  }
+
+/* C4.3 */
+.punbb .modmenu .container strong {
+  float: left;
+  }
+
+/* C4.4 */
+.punbb .modmenu input {
+  margin-left: 1em;
+  }
+
+
+/* C5 Message boxes
+-------------------------------------------------------------*/
+
+/* C5.1 */
+.punbb .info .container {
+  padding: 0.8em 1em
+  }
+
+/* C5.2 */
+.punbb .info .container .backlink {
+  padding-top: 0.8em;
+  }
+
+
+/* C6 Profile
+-------------------------------------------------------------*/
+
+/* C6.1 */
+#profile .container {
+  padding-left: 18.6em;
+  }
+
+/* C6.2 */
+#profilenav {
+  float: left;
+  width: 14em;
+  margin-left: -16.3em;
+  display: inline;
+  }
+
+/* C6.3 */
+#profilenav li {
+  padding-bottom: 0.8em;
+  font-weight: bold;
+  }
+
+/* C6.4 */
+#viewprofile ul, #profilenav ul {
+  border-style: solid;
+  border-width: 1px;
+  padding: 1.5em 18px 0.8em 18px;
+  margin: 0 0 1em 0;
+  }
+
+/* C6.5 */
+#viewprofile h2, #profilenav h2 {
+  background: transparent;
+  border: none;
+  padding: 0 0 0 0;
+  margin: 0 14px -0.6em 14px;
+  }
+
+/* C6.6 */
+#viewprofile h2 span, #profilenav h2 span {
+  padding: 0 5px;
+  position: relative;
+  }
+
+/* C6.7 */
+#viewprofile li, #setmods dl {
+  padding: 0 0 0 16em;
+  margin-bottom: 0.2em;
+  }
+
+/* C6.8 */
+#viewprofile li span {
+  float: left;
+  width: 14em;
+  margin-left: -16em;
+  padding: 0.5em 1em;
+  font-weight: bold;
+  }
+
+/*C6.9 */
+#setmods dt {
+  float: left;
+  width: 14em;
+  margin-left: -16em;
+  padding: 0.8em 1em;
+  font-weight: bold;
+  display: inline;
+  }
+
+/* C6.10 */
+#viewprofile li strong, #viewprofile li div, #setmods dd {
+  display: block;
+  padding: 0.5em 1em;
+  font-weight: normal;
+  }
+
+/* C6.11 */
+.punbb img.avatardemo {
+  float: right;
+  margin: 0 0 0.8em 1.8em
+  }
+
+
+/* C7 User list
+-------------------------------------------------------------*/
+
+/* C7.1 */
+#pun-userlist .formal, #pun-userlist .formal .container {
+  border-bottom: none;
+  margin-bottom: 0;
+  }
+
+/* C7.2 */
+#pun-userlist .usertable .container {
+  padding: 0 2.3em 2.3em 2.3em;
+  border-top: none;
+  }
+
+/* C7.3 */
+#pun-userlist .usertable table {
+  border-style: solid;
+  border-width: 1px;
+  }
+
+
+/*************************************************************
+D - PUNBB SECTIONS OTHER THAN MAIN CONTENT
+**************************************************************/
+
+/* D1 Logo and description
+-------------------------------------------------------------*/
+
+/* D1.1 */
+#pun-title {
+  margin: 0;
+  border-style: solid solid none solid;
+  border-width: 1px 1px 0 1px;
+  }
+
+/* D1.2 */
+#pun-title h1 {
+  display : block;
+  height : 40px;
+  padding: 2em 1em 0 1em;
+  }
+
+/* D1.3 */
+#pun-title .container {
+  border-style: none solid none solid;
+  }
+
+/* D1.4 */
+#pun-title h1 span  {
+  font-size: 1.5em;
+  }
+
+#pun-title table {
+	border: none;
+	height: 40px;
+	width: 100%;
+}
+
+#pun-title td.title-logo-tdl {
+	border: none;
+	width: 100%;
+}
+
+#pun-title td.title-logo-tdr {
+	border: none;
+	width: 468px;
+}
+
+/* D2 Page navigation
+-------------------------------------------------------------*/
+
+/* D2.1 */
+#pun-pagelinks {
+  position: absolute;
+  top: -15px;
+  left: 0;
+  margin: 0;
+  border: none;
+  padding: 0;
+  width: 100%;
+  }
+
+/* D2.2 */
+#pun-pagelinks .container {
+  background: transparent;
+  border: none;
+  padding: 0}
+
+/* D2.3 */
+#pun-pagelinks .container li {
+  display: inline
+  }
+
+/* D2.4 */
+#pun-pagelinks li a, #pun-pagelinks a:link, #pun-pagelinks a:hover {
+  height: 2em;
+  line-height: 2em;
+  padding: 0;
+  font-size: 1.2em;
+  margin-left: -9999px;
+  display: block;
+  float:left;
+  width: 100%;
+  }
+
+/* D2.5 */
+#pun-pagelinks a:active, #pun-pagelinks a:focus {
+  position:relative;
+  margin: 0;
+  }
+
+#pun-pagelinks li a span {
+  display:block;
+  margin: 0 1em
+  }
+
+/* D3 Forum navigation
+-------------------------------------------------------------*/
+
+/* D3.1 */
+#pun-navlinks, #pun-navlinks .container {
+  border-style: none;
+  border-width: 0;
+  margin: 0;
+  }
+
+/* D3.2 */
+#pun-navlinks .container {
+  padding: 0.7em 1em;
+  }
+
+/* D.3 */
+#pun-navlinks li {
+  display: inline;
+  padding-right: 1em;
+  }
+
+/* D3.4 */
+#pun-navlinks li a {
+  font-size: 1.1em;
+  }
+
+/* D4 User links
+-------------------------------------------------------------*/
+
+/* D4.1 */
+#pun-ulinks  {
+  margin-top: 0;
+  }
+
+/* D4.2 */
+#pun-ulinks .container {
+  border-top: none;
+  padding: 0.7em 1em;
+  }
+
+/* D4.3 */
+#pun-ulinks li, #pun-ulinks li a {
+  display: inline;
+  border-left-style: solid;
+  border-left-width: 1px;
+  white-space: nowrap;
+  }
+
+/* D4.4 */
+#pun-ulinks li a {
+  padding: 0 0.3em 0 0.6em
+  }
+
+/* D4.5 */
+#pun-ulinks li.item1, #pun-ulinks li.item1 a {
+  border-left-style: none;
+  border-left-width: 0;
+  padding-left: 0
+  }
+
+/* D5 Welcome box and Top Breadcrumbs
+-------------------------------------------------------------*/
+
+/* D5.1 */
+#pun-status, #pun-status .container {
+  border-bottom: none;
+  margin-bottom: 0;
+  }
+
+/* D5.2 */
+#pun-status .container {
+  padding: 0.8em 1em 1em 1em;
+  }
+
+/* D5.3 */
+#pun-status span {
+  white-space: nowrap;
+  margin-right: 0.5em;
+  }
+
+/* D5.4 */
+#pun-crumbs1 {
+  font-weight: bold;
+  overflow: hidden;
+  margin-top: 0;
+  }
+
+/* D5.5 */
+#pun-crumbs1 p.container {
+  border-top: none;
+  padding: 1em 1em 0.8em 1em;
+  font-size: 1.1em;
+  }
+
+/* D5.6 */
+#pun-break1 {
+  margin: 0 1em;
+  border-style: solid none;
+  border-width: 1px 0;
+  height: 0;
+  margin: -2px 1em;
+  position: relative;
+  z-index: 1;
+  }
+
+/* D6 Announcement
+-------------------------------------------------------------*/
+
+/* D6.1 */
+#pun-announcement h2 {
+  padding: 0;
+  margin: 0 1em -3.5em 1em;
+  border-style: none none solid none;
+  border-width: 0 0 1px 0;
+  position: relative;
+  font-weight: bold;
+  }
+
+/* D6.2 */
+#pun-announcement h2 span {
+  display: block;
+  padding: 1em 0 0.8em 0;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  }
+
+/* D6.3 */
+#pun-announcement .container {
+  padding: 4.3em 1em 1em 1em;
+  }
+
+/* D7 Statistics
+-------------------------------------------------------------*/
+
+/* D7.1 */
+#pun-stats .container {
+  padding: 0.8em 1em
+  }
+
+/* D7.2 */
+#pun-stats li.item1, #pun-stats li.item2 {
+  float: left;
+  clear: both;
+  line-height: 150%;
+  }
+
+/* D7.3 */
+#pun-stats li.item3, #pun-stats li.item4 {
+  text-align: right;
+  line-height: 150%;
+  }
+
+/* D7.4 */
+li#onlinelist {
+  margin-top: 1em;
+  border-top-style: solid;
+  border-top-width: 1px;
+  float: left;
+  width: 100%;
+  line-height: 130%;
+  }
+
+/* D7.5 */
+li#onlinelist div {
+  border-top-style: solid;
+  border-top-width: 1px;
+  padding: 0.7em 0 0 0;
+  }
+
+/* D8 Quick Jump - About - Bottom Breadcrumbs
+-------------------------------------------------------------*/
+
+/* D8.1 */
+#pun-qjump {
+  margin: 0;
+  border: none;
+  width: 50%;
+  position: relative;
+  float: left;
+  }
+
+/* D8.2 */
+#pun-qjump .container {
+  border: none;
+  background: transparent;
+  padding: 0.8em 1em;
+  }
+
+/* D8.3 */
+#pun-about {
+  margin-top: 0;
+  }
+
+/* D8.4 */
+#pun-about .container {
+  border-top-style: none;
+  text-align: right;
+  line-height: 150%;
+  padding: 0.8em 1em;
+  }
+
+/* D8.5 */
+#pun-about p span {
+  display:block;
+  padding-left: 50%;
+  }
+
+/* D8.6 */
+#pun-crumbs2 {
+  font-weight: bold;
+  overflow: hidden;
+  margin-bottom: 0;
+  border-bottom: none;
+  }
+
+/* D8.7 */
+#pun-crumbs2 .container {
+  border-bottom: none;
+  padding: 0.8em 1em;
+  font-size: 1.1em;
+  }
+
+/* D8.8 */
+#pun-break4 {
+  margin: -2px 1em;
+  border-style: solid none;
+  border-width: 1px 0;
+  position: relative;
+  height: 0;
+  z-index: 1;
+  }
+
+/* D8.9 */
+div.punbb-admin #pun-about .container {
+  border-top-style: solid;
+  border-top-width: 1px;
+  }
+
+
+/* D9 Help file
+-------------------------------------------------------------*/
+
+/* D9.1 */
+#pun-help .formal .info-box h3.legend {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  padding-bottom: 0;
+  margin-bottom: 0.8em;
+  }
+
+/* D9.2 */
+#pun-help .formal .info-box h3.legend span {
+  padding-bottom: 0.6em;
+  display: block;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  font-size: 1.1em;
+  }
+
+/* D9.3 */
+#pun-help .formal p, #pun-help .formal dd {
+  margin-bottom: 1em
+  }
+
+/* D9.4 */
+#pun-help .formal ul, #pun-help .formal dl {
+  padding: 0 0 0 1em
+  }
+
+/* D9.5 */
+#pun-help .formal li {
+  padding: 0;
+  line-height: 130%
+  }
+
+/* D9.6 */
+#pun-help .formal li * {
+  vertical-align: text-top
+  }
+
+/* D9.7 */
+#pun-help .formal dt span {
+  font: 1.4em/120% monaco, "bitstream vera sans mono", "courier new", courier, monospace
+  }
+
+/* D9.8 */
+#pun-help .formal .parsedmsg, #pun-help .formal .parsedmsg .incode {
+  padding-bottom: 0;
+  }

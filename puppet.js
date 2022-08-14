@@ -1,12 +1,11 @@
 import puppeteer from "puppeteer";
 import 'dotenv/config';
-
-import footerContent from './src/footer.js';
-import headerContent from './src/header.js';
-import announcementContent from './src/announcement.js';
-import replyContent from './src/reply.js';
+import { access, readFile } from 'fs/promises';
+import { constants } from "fs";
+import path from 'path';
 
 (async () => {
+    //TODO: доделать передачу браузера и разрешения/вьюпорта
     const browser = await puppeteer.launch({
         headless: false,
         defaultViewport: null,
@@ -14,7 +13,26 @@ import replyContent from './src/reply.js';
     });
     const page = await browser.newPage();
 
-    const replacer = async (page) => {
+    const getTextFromFile = async (pathToFile) => {
+        try {
+            await access(pathToFile, constants.R_OK);
+        } catch (e) {
+            return '';
+        }
+        const buffer = await readFile(pathToFile);
+        return buffer.toString();
+    };
+
+    const getFiles = async () => {
+        const dir =  path.dirname('src');
+        const footerContent = await getTextFromFile(path.resolve(dir, `src/footer.html`));
+        const headerContent = await getTextFromFile(path.resolve(dir, `src/header.html`));
+        const announcementContent = await getTextFromFile(path.resolve(dir, `src/announcement.html`));
+        const replyContent = await getTextFromFile(path.resolve(dir, `src/reply.html`));
+        return {footerContent, headerContent, announcementContent, replyContent};
+    };
+
+    const replacer = (files) => async (page, files = {}) => {
         await page.evaluate(async (content) => {
             const {headerContent, footerContent, announcementContent} = content;
 
@@ -53,12 +71,7 @@ import replyContent from './src/reply.js';
             // if (reply) {
             //     reply.innerHTML = '';
             // }
-        }, {
-            footerContent,
-            headerContent,
-            announcementContent,
-            replyContent,
-        })
+        }, files)
     };
 
     await page.setRequestInterception(true);
@@ -66,6 +79,7 @@ import replyContent from './src/reply.js';
     page.on('request', async (interceptedRequest) => {
         const isRequestingHTML = interceptedRequest.headers().accept?.includes('text/html');
         const isForumUrl = interceptedRequest.url().startsWith(process.env.URL);
+        const isStyle = interceptedRequest.headers().accept?.includes('text/css');
         if(isRequestingHTML && isForumUrl){
             const tmpPage = await browser.newPage();
             await tmpPage.goto(interceptedRequest.url(), {
@@ -73,16 +87,25 @@ import replyContent from './src/reply.js';
             });
             await page.bringToFront();
 
-            await replacer(tmpPage);
+            const files = await getFiles();
+            await replacer(files)(tmpPage, files);
 
             const html = await tmpPage.evaluate(() => document.documentElement.outerHTML);
             await tmpPage.close();
 
             interceptedRequest.respond({body: html, contentType: 'text/html; charset=utf-8'});
-        } else interceptedRequest.continue();;
+        } else if(isStyle && !isForumUrl) {
+            const urlParts = interceptedRequest.url().split('/');
+            const fileName = urlParts?.[urlParts.length - 1]?.replace(/\.[1-9]+\./, '.').split('.')[0];
+
+            const dir =  path.dirname('src');
+            const style = await getTextFromFile(path.resolve(dir, `src/${fileName}.css`));
+            interceptedRequest.respond({body: style, contentType: 'text/css; charset=utf-8'});
+        } 
+        else interceptedRequest.continue();;
     });
 
-    await page.goto(process.env.URL + 'viewtopic.php?id=1', {
+    await page.goto(process.env.URL, {
         waitUntil: 'domcontentloaded',
     });
 })();
