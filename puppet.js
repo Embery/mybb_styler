@@ -34,7 +34,7 @@ import path from 'path';
 
     const replacer = (files) => async (page, files = {}) => {
         await page.evaluate(async (content) => {
-            const {headerContent, footerContent, announcementContent} = content;
+            const {headerContent, footerContent, announcementContent, replyContent} = content;
 
             const header = document.querySelector('#html-header');
             if (header) {
@@ -67,10 +67,10 @@ import path from 'path';
                 document.querySelector('#pun-ulinks').insertAdjacentHTML('afterend', announcementDefault);
             }
             
-            // const reply = document.querySelector('.fs-box.hashelp');
-            // if (reply) {
-            //     reply.innerHTML = '';
-            // }
+            const reply = document.querySelector('.fs-box.hashelp');
+            if (reply) {
+                reply.insertAdjacentHTML('beforeend', replyContent);
+            }
         }, files)
     };
 
@@ -79,8 +79,11 @@ import path from 'path';
     page.on('request', async (interceptedRequest) => {
         const isRequestingHTML = interceptedRequest.headers().accept?.includes('text/html');
         const isForumUrl = interceptedRequest.url().startsWith(process.env.URL);
+        const isGet = interceptedRequest.method() === 'GET';
         const isStyle = interceptedRequest.headers().accept?.includes('text/css');
-        if(isRequestingHTML && isForumUrl){
+        const isForumCss = interceptedRequest.url().startsWith('https://forumstatic.ru');
+
+        if(isRequestingHTML && isForumUrl && isGet){
             const tmpPage = await browser.newPage();
             await tmpPage.goto(interceptedRequest.url(), {
                 waitUntil: 'domcontentloaded'
@@ -94,7 +97,7 @@ import path from 'path';
             await tmpPage.close();
 
             interceptedRequest.respond({body: html, contentType: 'text/html; charset=utf-8'});
-        } else if(isStyle && !isForumUrl) {
+        } else if(isStyle && !isForumUrl && isGet && isForumCss) {
             const urlParts = interceptedRequest.url().split('/');
             const fileName = urlParts?.[urlParts.length - 1]?.replace(/\.[1-9]+\./, '.').split('.')[0];
 
