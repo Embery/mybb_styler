@@ -1,0 +1,17 @@
+{
+    "unauthorised": [
+        "",
+        "profile.php?id=2",
+        "viewforum.php?id=1",
+        "viewtopic.php?id=1",
+        "userlist.php",
+        "search.php",
+        "login.php",
+        "register.php",
+        "search.php?action=show_recent",
+        "online.php"
+    ],
+    "user": [],
+    "moder": [],
+    "admin": []
+}
