@@ -1,11 +1,12 @@
 {
   "name": "for_mybb_and_co",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./puppet.js"
+    "start": "node ./look.js",
+    "make_screenshots": "node ./make_screenshots.js"
   },
   "author": "Emerael",
   "license": "ISC",
