@@ -53,6 +53,8 @@ const execute = async (resolution) => {
     await browser.close();
 }
 (async () => {
-    await rm('./screenshots', {recursive: true});
+    try{
+        await rm('./screenshots', {recursive: true});
+    } catch (e) {}
     await Promise.all(RESOLUTIONS.map(el => execute(el)));
 })();
