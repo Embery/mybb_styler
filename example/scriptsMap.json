@@ -1,0 +1,6 @@
+[
+    {
+        "from": "https://my.script/1.js",
+        "to": "scripts/1.js"
+    }
+]

@@ -38,7 +38,7 @@ const execute = async (resolution) => {
 
     page.on('request', interceptor({page, browser}));
 
-    const linksText = await getTextFromFile(`./${RESOURCES_FOLDER}/linksToScreen.json`, { assert: { type: "json" } });
+    const linksText = await getTextFromFile(`./${RESOURCES_FOLDER}/linksToScreen.json`);
     const links = JSON.parse(linksText);
 
     const modeToLinks = Object.entries(links);
