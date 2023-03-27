@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node ./look.js",
     "make_screenshots": "node ./make_screenshots.js",
-    "create_resources": "cp -r ./example/. ./resources"
+    "create_resources": "cp -r ./example/. ./resources ; cp -r ./.env.example ./.env"
   },
   "author": "Emerael",
   "license": "ISC",

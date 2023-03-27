@@ -40,7 +40,11 @@ export const interceptor = ({browser, page}) => async (interceptedRequest) => {
 
         const dir =  path.dirname('.');
         const style = await getTextFromFile(path.resolve(dir, `${RESOURCES_FOLDER}/${fileName}.css`));
-        interceptedRequest.respond({body: style, contentType: 'text/css; charset=utf-8'});
+        if (style.length ) {
+            interceptedRequest.respond({body: style, contentType: 'text/css; charset=utf-8'});
+        } else {
+            interceptedRequest.continue();
+        }
     } else if(isRequestingScripts) {
         const url = interceptedRequest.url();
         if(scriptsMap.has(url)) {
