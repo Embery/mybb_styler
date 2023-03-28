@@ -8,19 +8,13 @@ const RESOLUTIONS = process.env.RESOLUTIONS.split(';');
 
 slugify.extend({'?': ' params '});
 
-const MODE_TO_GROUP_ID = (process.env.MODE_TO_GROUP || '')
-    .split(';')
-    .reduce((acc, value) => {
-        const [mode, user] = value.split(':').map(el => (el || '').trim());
-        acc[mode] = user;
-
-        return acc;
-    }, {});
-
 const login = async ({mode, page}) => {
     const login = process.env[`USERNAME_${mode.toUpperCase()}`];
     const password = process.env[`PASSWORD_${mode.toUpperCase()}`];
 
+    if (!login || !password) {
+        throw new Error(`Логин и/или пароль для режима ${mode} не найден/ы. Проверьте файл .env`)
+    }
 
     await page.goto(`${process.env.URL}login.php`, {
         waitUntil: 'domcontentloaded',
@@ -29,7 +23,7 @@ const login = async ({mode, page}) => {
     await page.type('#fld1', login);
     await page.type('#fld2', password);
     await page.click('.formsubmit input');
-    await page.waitForSelector(`.gid${MODE_TO_GROUP_ID[mode]}`)
+    await page.waitForSelector('.gid3', {hidden: true});
 };
 
 const logout = async ({page}) => {
@@ -39,8 +33,11 @@ const logout = async ({page}) => {
 
     await page.evaluate(async () => {
         const logoutUrl = `${location.origin}/login.php?action=out&id=${window.UserID}`
-        await fetch(logoutUrl);
+        fetch(logoutUrl);
     });
+
+    await page.reload();
+    await page.waitForSelector('.gid3');
 };
 
 const makeScreenshots = async ({page, links, resolution, authMode}) => {
@@ -85,9 +82,14 @@ const execute = async (resolution) => {
                 await makeScreenshots({page, links, resolution, authMode: mode});
                 break;
             default:
-                await login({mode, page});
-                await makeScreenshots({page, links, resolution, authMode: mode});
-                await logout({page});
+                try {
+                    await login({mode, page});
+                    await makeScreenshots({page, links, resolution, authMode: mode});
+                    await logout({page});
+                }
+                catch (e) {
+                    console.log(e);
+                }
         }
     }
     await browser.close();
