@@ -6,14 +6,14 @@ export const replacer = (files) => async (page, files = {}) => {
         if (header) {
             header.innerHTML = headerContent;
         } else {
-            document.querySelector('#mybb-counter').insertAdjacentHTML('afterend', `<div id="html-header">${headerContent}</div>`);
+            document.querySelector('#mybb-counter')?.insertAdjacentHTML('afterend', `<div id="html-header">${headerContent}</div>`);
         }
 
         const footer = document.querySelector('#html-footer');
         if (footer) {
             footer.innerHTML = footerContent;
         } else {
-            document.querySelector('.punbb').insertAdjacentHTML('beforeend', `<div id="html-footer">${footerContent}</div>`);
+            document.querySelector('.punbb')?.insertAdjacentHTML('beforeend', `<div id="html-footer">${footerContent}</div>`);
         }
 
         //TODO - будет рисоваться на всех страницах, подумать, как сделать только на главной
@@ -30,12 +30,9 @@ export const replacer = (files) => async (page, files = {}) => {
         if (announcement) {
             announcement.innerHTML = announcementDefault
         } else {
-            document.querySelector('#pun-ulinks').insertAdjacentHTML('afterend', announcementDefault);
+            document.querySelector('#pun-ulinks')?.insertAdjacentHTML('afterend', announcementDefault);
         }
         
-        const reply = document.querySelector('.fs-box.hashelp');
-        if (reply) {
-            reply.insertAdjacentHTML('beforeend', replyContent);
-        }
+        document.querySelector('.fs-box.hashelp')?.insertAdjacentHTML('beforeend', replyContent);
     }, files)
 };

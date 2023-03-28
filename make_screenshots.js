@@ -8,6 +8,41 @@ const RESOLUTIONS = process.env.RESOLUTIONS.split(';');
 
 slugify.extend({'?': ' params '});
 
+const MODE_TO_GROUP_ID = (process.env.MODE_TO_GROUP || '')
+    .split(';')
+    .reduce((acc, value) => {
+        const [mode, user] = value.split(':').map(el => (el || '').trim());
+        acc[mode] = user;
+
+        return acc;
+    }, {});
+
+const login = async ({mode, page}) => {
+    const login = process.env[`USERNAME_${mode.toUpperCase()}`];
+    const password = process.env[`PASSWORD_${mode.toUpperCase()}`];
+
+
+    await page.goto(`${process.env.URL}login.php`, {
+        waitUntil: 'domcontentloaded',
+    });
+
+    await page.type('#fld1', login);
+    await page.type('#fld2', password);
+    await page.click('.formsubmit input');
+    await page.waitForSelector(`.gid${MODE_TO_GROUP_ID[mode]}`)
+};
+
+const logout = async ({page}) => {
+    await page.goto(`${process.env.URL}login.php`, {
+        waitUntil: 'domcontentloaded',
+    });
+
+    await page.evaluate(async () => {
+        const logoutUrl = `${location.origin}/login.php?action=out&id=${window.UserID}`
+        await fetch(logoutUrl);
+    });
+};
+
 const makeScreenshots = async ({page, links, resolution, authMode}) => {
     try {
         await mkdir(`./screenshots/${resolution}/${authMode}`, { recursive: true }, (err) => {
@@ -48,6 +83,11 @@ const execute = async (resolution) => {
         switch (mode){
             case 'unauthorised':
                 await makeScreenshots({page, links, resolution, authMode: mode});
+                break;
+            default:
+                await login({mode, page});
+                await makeScreenshots({page, links, resolution, authMode: mode});
+                await logout({page});
         }
     }
     await browser.close();
