@@ -32,7 +32,13 @@ export const replacer = (files) => async (page, files = {}) => {
         } else {
             document.querySelector('#pun-ulinks')?.insertAdjacentHTML('afterend', announcementDefault);
         }
-        
-        document.querySelector('.fs-box.hashelp')?.insertAdjacentHTML('beforeend', replyContent);
+
+        const reply = document.querySelector('.fs-box.hashelp');
+        const subscribe = document.querySelector('.fs-box.hashelp .checkfield');
+        if (subscribe) {
+            subscribe.insertAdjacentHTML('beforebegin', replyContent);
+        } else if (reply) {
+            reply.insertAdjacentHTML('beforeend', replyContent);
+        }
     }, files)
 };
