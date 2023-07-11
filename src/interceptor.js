@@ -15,7 +15,7 @@ export const interceptor = ({browser, page}) => async (interceptedRequest) => {
     const isForumUrl = interceptedRequest.url().startsWith(process.env.URL);
     const isGet = interceptedRequest.method() === 'GET';
     const isStyle = interceptedRequest.headers().accept?.includes('text/css');
-    const isForumCss = interceptedRequest.url().startsWith('https://forumstatic.ru');
+    const canBeForumCss = interceptedRequest.url().match(/^http(s)?:\/\/forumstatic\.ru.*/);
 
     const scriptsMap = await createScriptsMap();
     const isRequestingScripts = interceptedRequest.url().split('/').at(-1).split('?')[0].split('.').at(-1) === 'js';
@@ -34,7 +34,7 @@ export const interceptor = ({browser, page}) => async (interceptedRequest) => {
         await tmpPage.close();
 
         interceptedRequest.respond({body: html, contentType: 'text/html; charset=utf-8'});
-    } else if(isStyle && !isForumUrl && isGet && isForumCss) {
+    } else if(isStyle && !isForumUrl && isGet && canBeForumCss) {
         const urlParts = interceptedRequest.url().split('/');
         const fileName = urlParts?.[urlParts.length - 1]?.replace(/\.[1-9]+\./, '.').split('.')[0];
 

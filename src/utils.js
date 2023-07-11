@@ -7,11 +7,11 @@ export const RESOURCES_FOLDER = 'resources';
 export const getTextFromFile = async (pathToFile) => {
     try {
         await access(pathToFile, constants.R_OK);
+        const buffer = await readFile(pathToFile);
+        return buffer.toString();
     } catch (e) {
         return '';
     }
-    const buffer = await readFile(pathToFile);
-    return buffer.toString();
 };
 
 export const getFiles = async () => {
